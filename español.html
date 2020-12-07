@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" href="favicon.png" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://use.fontawesome.com/d1341f9b7a.js"></script>
+    <script src="https://use.fontawesome.com/aac5c45839.js"></script>
+    <script data-ad-client="ca-pub-5771642193720646" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+	<title>TypeHere | Lo Editor de Texto Online</title>
+	<link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" media="(min-width: 320px)" href="cssmedia/small.css">
+    <link rel="stylesheet" media="(min-width: 568px)" href="css/mediamedium.css">
+</head>
+<body>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="box" align="center">
+            <a lang="en" href="index.html" language='english'><img src="flags/english.png" height="12px" weight="12px"/></a>
+			<a lang="es" href="español.html" language='espanõl'><img src="flags/es.jpeg" height="12px" weight="12px"/></a>
+			<a href="pt-br.html" language='portuguese'><img src="flags/brazil.jpeg" height="12px" weight="12px"/></a>
+            <div class="content">
+            <img src="logos/logo-es-br.png" height="56px">     
+    </div>
+           
+        <div>
+        <body onload="enableEditMode();" align="justify">
+            <button onclick="execCmd('bold');"><i class="fa fa-bold"></i></button>
+			<button onclick="execCmd('italic');"><i class="fa fa-italic"></i></button>
+			<button onclick="execCmd('underline');"><i class="fa fa-underline"></i></button>
+			<button onclick="execCmd('strikeThrough');"><i class="fa fa-strikethrough"></i></button>
+			<button onclick="execCmd('justifyLeft');"><i class="fa fa-align-left"></i></button>
+			<button onclick="execCmd('justifyCenter');"><i class="fa fa-align-center"></i></button>
+			<button onclick="execCmd('justifyRight');"><i class="fa fa-align-right"></i></button>
+			<button onclick="execCmd('justifyFull');"><i class="fa fa-align-justify"></i></button>
+			<button onclick="execCmd('cut');"><i class="fa fa-cut"></i></button>
+			<button onclick="execCmd('copy');"><i class="fa fa-copy"></i></button>
+			<button onclick="execCmd('indent');"><i class="fa fa-indent"></i></button>
+			<button onclick="execCmd('outdent');"><i class="fa fa-dedent"></i></button>
+			<button onclick="execCmd('subscript');"><i class="fa fa-subscript"></i></button>
+			<button onclick="execCmd('superscript');"><i class="fa fa-superscript"></i></button>
+			<button onclick="execCmd('undo');"><i class="fa fa-undo"></i></button>
+			<button onclick="execCmd('redo');"><i class="fa fa-repeat"></i></button>
+			<button onclick="execCmd('insertUnorderedList');"><i class="fa fa-list-ul"></i></button>
+			<button onclick="execCmd('insertOrderedList');"><i class="fa fa-list-ol"></i></button>
+			<button onclick="execCmd('insertParagraph');"><i class="fa fa-paragraph"></i></button>
+			<button onclick="execCmd('insertHorizontalRule');">HR</button>
+			<button onclick="execCommandWithArg('createLink', prompt('ingrese la URL', 'http://'));"><i class="fa fa-link"></i></button>
+			<button onclick="execCmd('unlink');"><i class="fa fa-unlink"></i></button>
+			<button onclick="toggleSource();"><i class="fa fa-code"></i></button>
+			<button onclick="toggleEdit();">Editar</button>
+            <input type="color" onchange="execCommandWithArg('foreColor', this.value);">
+			<input type="color"  onchange="execCommandWithArg('hiliteColor', this.value);">
+            <button onclick="execCommandWithArg('insertImage', prompt('ingrese la URL de la imagen', ''));"><i class="fa fa-file-image-o"></i></button>
+			<button onclick="execCmd('selectAll');">Seleccionar Todo</button>
+			<br />
+			<select onchange="execCommandWithArg('fontName', this.value);">
+				<option value="Arial">Arial</option>
+				<option value="Comic Sans MS">Comic Sans MS</option>
+				<option value="Courier">Courier</option>
+				<option value="Georgia">Georgia</option>
+				<option value="Tahoma">Tahoma</option>
+				<option value="Times New Roman">Times New Roman</option>
+				<option value="Verdana">Verdana</option>
+			</select>
+			<select onchange="execCommandWithArg('fontSize', this.value);">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+			</select>
+            <select onchange="execCommandWithArg('formatBlock', this.value);">
+				<option value="H1">H1</option>
+				<option value="H2">H2</option>
+				<option value="H3">H3</option>
+				<option value="H4">H4</option>
+				<option value="H5">H5</option>
+				<option value="H6">H6</option>
+			</select>
+		</div>
+         <div class="container">
+         <div class="embed-responsive embed-responsive-16by9">
+            <iframe name="richTextField"></iframe>
+        </div>
+        </div>
+		<script type="text/javascript">
+
+			var showingSourceCode = false;
+			var isInEditMode = true;
+
+			function enableEditMode () {
+				richTextField.document.designMode = 'On';
+			}
+
+			function execCmd (command) {
+				richTextField.document.execCommand(command, false, null);
+			}
+
+			function execCommandWithArg (command, arg) {
+				richTextField.document.execCommand(command, false, arg);
+			}
+
+			function toggleSource () {
+				if(showingSourceCode){
+					richTextField.document.getElementsByTagName('body')[0].innerHTML = richTextField.document.getElementsByTagName('body')[0].textContent;
+					showingSourceCode = false;
+				}else{
+					richTextField.document.getElementsByTagName('body')[0].textContent = richTextField.document.getElementsByTagName('body')[0].innerHTML;
+					showingSourceCode = true;
+				}
+			}
+
+			function toggleEdit () {
+				if(isInEditMode){
+					richTextField.document.designMode = 'Off';
+					isInEditMode = false;
+				}else{
+					richTextField.document.designMode = 'On';
+					isInEditMode = true;
+				}
+			}               
+
+        </script>
+        </body>
+
+        
+    <div class="footer" align="center">
+    <p>
+    Ads:
+    </p>
+       Coming Soon
+        </div>
+    <div class="titleio">
+    <p>Created by: <a href="https://twitter.com/natanskern">Natanskern</p></a>
+    </div>
+	</div>
+</div>
+</div>
+</body>
+</div>
+</div>
+</html>
+
